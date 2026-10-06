@@ -1,0 +1,27 @@
+name: Hello Actions
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # adds a manual "Run workflow" button
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say hello
+        run: echo "Hello from GitHub Actions!"
+
+      - name: Show who and where
+        run: |
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Event: ${{ github.event_name }}"
+          uname -a
+          date
+
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: List repository files
+        run: ls -la
